@@ -45,7 +45,6 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
         require(input < 4, "Only inputs 0 - 3 are allowed");
         require(itemsRedeemed[input] == false, "Item selected has been already redeemed! Please choose another item!");
 
-        // Check if item has already been redeemed (based on address)
         string memory selectedItemName;
         uint selectedItemTokensRequired;
 
