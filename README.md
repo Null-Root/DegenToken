@@ -62,8 +62,10 @@ The DegenToken smart contract is written in Solidity and deployed on the Avalanc
 10. Switch to the "Deploy & run transactions" tab
 11. Under the "Environment", select the "Injected Provider - Metamask"
 12. Check the metamask wallet and see if connected to the Avalanche Fuji Testnet
-13. If you want to deploy, Click the "Deploy" button
-14. If you want to check the deployed contract, paste this ```0xd19714f9637939eF61D2ab6eE9bE27213E563A8E``` on the side of the "At Address" button then click the said button
+
+    ---------------------------------------------------
+14. If you want to deploy your contract, Click the "Deploy" button
+15. If you want to check my deployed contract, paste this ```0xd19714f9637939eF61D2ab6eE9bE27213E563A8E``` on the side of the "At Address" button then click the said button
 
 ## Help
 
