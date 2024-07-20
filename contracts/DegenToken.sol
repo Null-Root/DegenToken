@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.18;
 
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -10,23 +10,12 @@ import "hardhat/console.sol";
 
 contract DegenToken is ERC20, Ownable, ERC20Burnable {
 
-    struct StoreItem {
-        uint requiredTokens;
-        string itemName;
-        bool isRedeemed;
-    }
-
-    StoreItem[] private storeItems;
+    mapping(uint => bool) private itemsRedeemed;
 
     constructor()
     ERC20("Degen", "DGN")
     Ownable()
-    {
-        storeItems.push(StoreItem(55, "League of Legends - Shaco NFT", false));
-        storeItems.push(StoreItem(12, "Apple NFT", false));
-        storeItems.push(StoreItem(18, "Toy Story Merch", false));
-        storeItems.push(StoreItem(26, "Arm NFT", false));
-    }
+    {}
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount); 
@@ -52,24 +41,47 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
     }
 
     function redeemTokens(uint8 input) external payable returns (string memory) {
-        require(input >= 0 || input <= 3, "Invalid Input");
-        require(storeItems[input].isRedeemed == false, "This item is already redeemed!");
-        require(balanceOf(msg.sender) >= storeItems[input].requiredTokens, "Current DGN tokens are not enough to cover the redeem!");
+        // Check if input is within range 0 - 3
+        require(input < 4, "Only inputs 0 - 3 are allowed");
+        require(itemsRedeemed[input] == false, "Item selected has been already redeemed! Please choose another item!");
 
-        approve(msg.sender, storeItems[input].requiredTokens);
-        transferFrom(msg.sender, owner(), storeItems[input].requiredTokens);
-        storeItems[input].isRedeemed = true;
+        // Check if item has already been redeemed (based on address)
+        string memory selectedItemName;
+        uint selectedItemTokensRequired;
 
-        return string.concat(storeItems[input].itemName ," has been redeemed!");
-    }
-
-    function showStoreItems() public view returns (string memory) {
-        string memory itemPrintStr = "";
-
-        for (uint i = 0; i < 4; i++) {
-            itemPrintStr = string.concat(itemPrintStr, "   ", Strings.toString(i), ". ", storeItems[i].itemName);
+        // Check items
+        if (input == 0) {
+            selectedItemName = "League of Legends - Shaco NFT";
+            selectedItemTokensRequired = 55;
+        }
+        if (input == 1) {
+            selectedItemName = "Apple NFT";
+            selectedItemTokensRequired = 12;
+        }
+        if (input == 2) {
+            selectedItemName = "Toy Story Merch";
+            selectedItemTokensRequired = 43;
+        }
+        if (input == 3) {
+            selectedItemName = "Arm NFT";
+            selectedItemTokensRequired = 25;
         }
 
-        return itemPrintStr;
+        require(balanceOf(msg.sender) >= selectedItemTokensRequired, "Current DGN tokens are not enough to cover the redeem!");
+
+        approve(msg.sender, selectedItemTokensRequired);
+        transferFrom(msg.sender, owner(), selectedItemTokensRequired);
+
+        // Change status to true (This tells that the item has been redeemed already)
+        itemsRedeemed[input] = true;
+
+        return string.concat(selectedItemName, " has been redeemed!");
+    }
+
+    function showStoreItems() public pure returns (string memory) {
+        return  " 1. League of Legends - Shaco NFT "
+                " 2. Apple NFT "
+                " 3. Toy Story Merch "
+                " 4. Arm NFT ";
     }
 }

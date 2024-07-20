@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.21+commit.d9974bed"
+		"version": "0.8.18+commit.87f61d96"
 	},
 	"language": "Solidity",
 	"output": {
@@ -344,7 +344,7 @@
 						"type": "string"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -530,7 +530,7 @@
 		"compilationTarget": {
 			"contracts/DegenToken.sol": "DegenToken"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "paris",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -615,11 +615,11 @@
 			]
 		},
 		"contracts/DegenToken.sol": {
-			"keccak256": "0x80276ec3bd3ac42c4fa5409a1aebd908d329e7f3e6de14432daeb5cbf69d017e",
+			"keccak256": "0xa77adf17db947397693c7a32503dcd91bbfb905cbe9503f7ed36fe5600cbc514",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ac9eebe7011bb48bf848a3358057eb40217d4a086542b652596dc4a0ae94a866",
-				"dweb:/ipfs/Qme9Z4Ryrx4FbweYrePFsmXtemqmzfVYcfpojQpsS8wvVf"
+				"bzz-raw://4bbc202675cf7a6fbd6b082885dbdcb46822b81e1caa27adf7fc43238df7a8f3",
+				"dweb:/ipfs/QmPEbQ43Y23uKH8hNgwLUD7NLwBLNBTuGmTW4YHMbjxFnN"
 			]
 		},
 		"hardhat/console.sol": {
